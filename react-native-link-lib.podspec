@@ -21,19 +21,25 @@ Pod::Spec.new do |s|
   # React Native 核心依赖
   s.dependency "React-Core"
   
-  # 第三方依赖 - 对应 package.json 中的 peerDependencies
-  s.dependency "RNCAsyncStorage"
-  s.dependency "RNCPicker"
-  s.dependency "FlashList"
-  s.dependency "RNAudioRecorderPlayer"
-  s.dependency "RNFastImage"
-  s.dependency "BVLinearGradient"
-  s.dependency "react-native-pager-view"
-  s.dependency "react-native-safe-area-context"
-  s.dependency "RNScreens"
-  s.dependency "RNSVG"
-  s.dependency "react-native-video"
-  s.dependency "RNViewShot"
-  s.dependency "react-native-webview"
+  # 第三方依赖 - 使用相对路径引用 node_modules 中的依赖
+  # 这种方式确保 pod 能够找到本地安装的依赖包
+  
+  # 定义 node_modules 路径前缀
+  node_modules_path = File.join(File.dirname(`node --print "require.resolve('react-native/package.json')"`), '..')
+  
+  # 使用路径方式声明依赖
+  s.dependency 'RNCAsyncStorage', :path => File.join(node_modules_path, '@react-native-async-storage/async-storage')
+  s.dependency 'RNCPicker', :path => File.join(node_modules_path, '@react-native-picker/picker')
+  s.dependency 'FlashList', :path => File.join(node_modules_path, '@shopify/flash-list')
+  s.dependency 'RNAudioRecorderPlayer', :path => File.join(node_modules_path, 'react-native-audio-recorder-player')
+  s.dependency 'RNFastImage', :path => File.join(node_modules_path, 'react-native-fast-image')
+  s.dependency 'BVLinearGradient', :path => File.join(node_modules_path, 'react-native-linear-gradient')
+  s.dependency 'react-native-pager-view', :path => File.join(node_modules_path, 'react-native-pager-view')
+  s.dependency 'react-native-safe-area-context', :path => File.join(node_modules_path, 'react-native-safe-area-context')
+  s.dependency 'RNScreens', :path => File.join(node_modules_path, 'react-native-screens')
+  s.dependency 'RNSVG', :path => File.join(node_modules_path, 'react-native-svg')
+  s.dependency 'react-native-video', :path => File.join(node_modules_path, 'react-native-video')
+  s.dependency 'RNViewShot', :path => File.join(node_modules_path, 'react-native-view-shot')
+  s.dependency 'react-native-webview', :path => File.join(node_modules_path, 'react-native-webview')
 
 end

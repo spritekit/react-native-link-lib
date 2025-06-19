@@ -161,25 +161,52 @@ function MyApp() {
 
 ### iOS Pod 安装问题
 
-如果遇到 iOS pod 安装问题，请检查：
+如果在运行 `pod install` 时遇到 "Unable to find a specification" 错误：
 
-1. **确认依赖已安装**：确保所有 peerDependencies 都已正确安装
-2. **清理 Pod 缓存**：
+1. **更新 CocoaPods 仓库**：
+   ```bash
+   pod repo update
+   # 或者
+   pod install --repo-update
+   ```
+
+2. **检查依赖版本兼容性**：
+   确保你的项目中安装的依赖版本与 React Native 版本兼容。查看各依赖的官方文档了解版本要求。
+
+3. **清理并重新安装**：
    ```bash
    cd ios
-   rm -rf Pods Podfile.lock
-   pod install
+   rm -rf Pods/
+   rm Podfile.lock
+   pod install --repo-update
    ```
-3. **检查 CocoaPods 版本**：确保使用较新版本的 CocoaPods
+
+4. **检查 CocoaPods 版本**：
    ```bash
    pod --version
-   sudo gem install cocoapods
+   # 建议使用 1.11.0 或更高版本
+   gem update cocoapods
    ```
-4. **重新安装依赖**：
+
+5. **验证 podspec 文件**：
    ```bash
-   rm -rf node_modules && npm install
-   cd ios && pod install
+   # 使用内置验证脚本（推荐）
+   ./scripts/validate-podspec.sh
+   
+   # 或者手动验证
+   pod spec lint react-native-link-lib.podspec --allow-warnings
    ```
+
+6. **如果特定依赖无法找到**：
+   - 检查该依赖是否已正确安装在 `node_modules` 中
+   - 确认依赖版本与你的 React Native 版本兼容
+   - 查看依赖的官方文档了解特殊安装要求
+
+### 常见错误解决方案
+
+- **RNCAsyncStorage not found**: 确保安装了 `@react-native-async-storage/async-storage`
+- **RNFastImage not found**: 确保安装了 `react-native-fast-image` 并运行了 `pod repo update`
+- **版本冲突**: 检查 `package.json` 中的依赖版本，移除版本号前的 `^` 符号以锁定特定版本
 
 ### 常见问题
 

@@ -20,22 +20,21 @@ Pod::Spec.new do |s|
 
   # React Native 第三方库 - 与package.json版本保持一致
   prefix = File.dirname(__FILE__) + '/../node_modules'
-  pod 'RNScreens', :path => "#{prefix}/react-native-screens"
-  pod 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
-  pod 'RNFS', :path => "#{prefix}/react-native-fs"
-  pod 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
-  pod 'RNSVG', :path => "#{prefix}/react-native-svg"
-  pod 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
-  pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
-  pod 'RNCPicker', :path => "#{prefix}/@react-native-picker/picker"
-  pod 'react-native-update', :path => "#{prefix}/react-native-update"
-  pod 'RNCAsyncStorage', :path => "#{prefix}/@react-native-async-storage/async-storage"
-  pod 'react-native-video', :path => "#{prefix}/react-native-video"
-  pod 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
-  pod 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
-  pod 'RNFlashList', :path => "#{prefix}/@shopify/flash-list"
-  pod 'RNAudioRecorderPlayer', :path => "#{prefix}/react-native-audio-recorder-player"
-  pod 'react-native-tim-js', :path => "#{prefix}/@tencentcloud/chat-react-native"
-
-
+  s.dependency 'RNScreens', :path => "#{prefix}/react-native-screens"
+  s.dependency 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
+  s.dependency 'RNFS', :path => "#{prefix}/react-native-fs"
+  s.dependency 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
+  s.dependency 'RNSVG', :path => "#{prefix}/react-native-svg"
+  s.dependency 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
+  s.dependency 'react-native-webview', :path => "#{prefix}/react-native-webview"
+  s.dependency 'RNCPicker', :path => "#{prefix}/@react-native-picker/picker"
+  s.dependency 'react-native-update', :path => "#{prefix}/react-native-update"
+  s.dependency 'RNCAsyncStorage', :path => "#{prefix}/@react-native-async-storage/async-storage"
+  s.dependency 'react-native-video', :path => "#{prefix}/react-native-video"
+  s.dependency 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
+  s.dependency 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
+  s.dependency 'RNFlashList', :path => "#{prefix}/@shopify/flash-list"
+  s.dependency 'RNAudioRecorderPlayer', :path => "#{prefix}/react-native-audio-recorder-player"
+  s.dependency 'react-native-tim-js', :path => "#{prefix}/@tencentcloud/chat-react-native"
+  
 end

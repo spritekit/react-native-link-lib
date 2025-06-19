@@ -3,9 +3,9 @@
   "version": "1.0.29",
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node scripts/test-configuration.js",
     "configure-podfile": "node scripts/configure-podfile-safe.js",
-    "postinstall": "node scripts/configure-podfile-safe.js || echo \"⚠️  自动配置 Podfile 失败，请手动运行: npx react-native-link-lib-configure\""
+    "postinstall": "node scripts/configure-podfile-safe.js 2>/dev/null || true"
   },
   "bin": {
     "react-native-link-lib-configure": "scripts/configure-podfile-safe.js"

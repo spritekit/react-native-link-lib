@@ -99,6 +99,27 @@ pod 'FlashList', :path => '../node_modules/@shopify/flash-list'
 
 ## 故障排除
 
+### 🔧 自动配置相关问题
+
+**✅ 最新版本已解决的问题：**
+- 修复了配置脚本在库项目中运行的问题
+- 改进了项目根目录检测逻辑
+- 增强了错误处理和用户反馈
+
+**如果自动配置失败：**
+1. **手动运行配置脚本**
+   ```bash
+   npx react-native-link-lib-configure
+   ```
+
+2. **查看详细日志**
+   - 新版本脚本会提供详细的调试信息
+   - 包括项目检测过程和错误原因
+
+3. **确认项目结构**
+   - 确保在 React Native 应用项目根目录中运行
+   - 确保存在 `ios/Podfile` 或项目根目录下的 `Podfile`
+
 ### iOS 常见问题
 
 #### 1. "Unable to find a specification" 错误

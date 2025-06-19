@@ -72,6 +72,13 @@ function findProjectRoot() {
         // 验证这是一个 React Native 项目
         try {
           const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+          
+          // 检查是否是 react-native-link-lib 库本身
+          if (packageJson.name === 'react-native-link-lib') {
+            log('检测到这是 react-native-link-lib 库项目本身，跳过配置', 'warning');
+            throw new Error('SKIP_LIBRARY_PROJECT');
+          }
+          
           const hasReactNative = 
             (packageJson.dependencies && packageJson.dependencies['react-native']) ||
             (packageJson.devDependencies && packageJson.devDependencies['react-native']) ||
@@ -84,6 +91,9 @@ function findProjectRoot() {
             log('package.json 中未找到 react-native 依赖，继续查找');
           }
         } catch (e) {
+          if (e.message === 'SKIP_LIBRARY_PROJECT') {
+            throw e;
+          }
           log(`解析 package.json 失败: ${e.message}`, 'warning');
         }
       } else {
@@ -211,6 +221,12 @@ function main() {
     log('🚀 现在可以运行 cd ios && pod install');
     
   } catch (error) {
+    if (error.message === 'SKIP_LIBRARY_PROJECT') {
+      log('ℹ️  这是 react-native-link-lib 库项目，无需配置 Podfile', 'info');
+      log('📝 此脚本仅在使用该库的 React Native 应用项目中运行');
+      process.exit(0);
+    }
+    
     log(`配置失败: ${error.message}`, 'error');
     log('💡 提示: 请确保在 React Native 项目根目录中运行此脚本');
     log('💡 或者手动运行: npx react-native-link-lib-configure');

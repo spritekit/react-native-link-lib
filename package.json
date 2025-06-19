@@ -1,6 +1,6 @@
 {
   "name": "react-native-link-lib",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
     "test": "jest",

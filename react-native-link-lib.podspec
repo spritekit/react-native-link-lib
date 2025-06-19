@@ -5,9 +5,11 @@ package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 Pod::Spec.new do |s|
   s.name         = "react-native-link-lib"
   s.version      = package['version']
-  s.homepage         = 'https://github.com/your-org/react-native-link-lib'
-  s.summary          = 'A React Native library for linking common dependencies'
-  s.description      = 'This library provides a centralized way to manage and link common React Native dependencies in a hybrid app environment.'
+  s.summary      = package['description']
+  s.description  = <<-DESC
+                  A library to manage React Native dependencies and native configurations
+                   DESC
+  s.homepage     = ""
   s.license      = "MIT"
   s.author       = { "author" => "" }
   s.platforms    = { :ios => "11.0" }
@@ -19,22 +21,21 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
 
   # React Native 第三方库 - 与package.json版本保持一致
-  prefix = File.dirname(__FILE__) + '/../node_modules'
-  s.dependency 'RNScreens', :path => "#{prefix}/react-native-screens"
-  s.dependency 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
-  s.dependency 'RNFS', :path => "#{prefix}/react-native-fs"
-  s.dependency 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
-  s.dependency 'RNSVG', :path => "#{prefix}/react-native-svg"
-  s.dependency 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
-  s.dependency 'react-native-webview', :path => "#{prefix}/react-native-webview"
-  s.dependency 'RNCPicker', :path => "#{prefix}/@react-native-picker/picker"
-  s.dependency 'react-native-update', :path => "#{prefix}/react-native-update"
-  s.dependency 'RNCAsyncStorage', :path => "#{prefix}/@react-native-async-storage/async-storage"
-  s.dependency 'react-native-video', :path => "#{prefix}/react-native-video"
-  s.dependency 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
-  s.dependency 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
-  s.dependency 'RNFlashList', :path => "#{prefix}/@shopify/flash-list"
-  s.dependency 'RNAudioRecorderPlayer', :path => "#{prefix}/react-native-audio-recorder-player"
-  s.dependency 'react-native-tim-js', :path => "#{prefix}/@tencentcloud/chat-react-native"
-  
+  s.dependency "RNCAsyncStorage", "~> 1.23.1"
+  s.dependency "RNCPicker", "~> 2.7.7"
+  s.dependency "RNFlashList", "~> 1.7.3"
+  s.dependency "RNAudioRecorderPlayer", "~> 3.6.12"
+  s.dependency "RNFastImage", "~> 8.6.3"
+  s.dependency "RNFS", "~> 2.20.0"
+  s.dependency "BVLinearGradient", "~> 2.8.3"
+  s.dependency "react-native-pager-view", "~> 6.6.1"
+  s.dependency "react-native-popover-view", "~> 6.1.0"
+  s.dependency "react-native-safe-area-context", "~> 4.5.0"
+  s.dependency "RNScreens", "~> 3.20.0"
+  s.dependency "RNSVG", "~> 12.3.0"
+  s.dependency "react-native-update", "~> 10.18.0"
+  s.dependency "react-native-video", "~> 5.2.1"
+  s.dependency "react-native-view-shot", "~> 3.8.0"
+  s.dependency "react-native-webview", "~> 13.10.5"
+
 end

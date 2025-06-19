@@ -1,0 +1,79 @@
+// React Native Link Lib - Android Settings Configuration
+// 配置所有React Native第三方库的模块依赖
+
+rootProject.name = 'react-native-link-lib'
+
+// React Native 核心模块
+include ':react-native'
+project(':react-native').projectDir = new File(rootProject.projectDir, '../node_modules/react-native/android')
+
+// AsyncStorage
+include ':react-native-async-storage_async-storage'
+project(':react-native-async-storage_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-async-storage/async-storage/android')
+
+// Picker
+include ':react-native-picker_picker'
+project(':react-native-picker_picker').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-picker/picker/android')
+
+// FlashList
+include ':shopify_flash-list'
+project(':shopify_flash-list').projectDir = new File(rootProject.projectDir, '../node_modules/@shopify/flash-list/android')
+
+// Audio Recorder Player
+include ':react-native-audio-recorder-player'
+project(':react-native-audio-recorder-player').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-audio-recorder-player/android')
+
+// Fast Image
+include ':react-native-fast-image'
+project(':react-native-fast-image').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fast-image/android')
+
+// File System
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
+
+// Linear Gradient
+include ':react-native-linear-gradient'
+project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+
+// Pager View
+include ':react-native-pager-view'
+project(':react-native-pager-view').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-pager-view/android')
+
+// Popover View
+include ':react-native-popover-view'
+project(':react-native-popover-view').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-popover-view/android')
+
+// Safe Area Context
+include ':react-native-safe-area-context'
+project(':react-native-safe-area-context').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-safe-area-context/android')
+
+// Screens
+include ':react-native-screens'
+project(':react-native-screens').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-screens/android')
+
+// SVG
+include ':react-native-svg'
+project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
+
+// Update
+include ':react-native-update'
+project(':react-native-update').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-update/android')
+
+// Video
+include ':react-native-video'
+project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
+
+// View Shot
+include ':react-native-view-shot'
+project(':react-native-view-shot').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-shot/android')
+
+// WebView
+include ':react-native-webview'
+project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
+
+// 应用主模块
+include ':app'
+
+// 库模块
+include ':react-native-link-lib'
+project(':react-native-link-lib').projectDir = new File(rootProject.projectDir, '.')

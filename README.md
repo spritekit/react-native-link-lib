@@ -51,6 +51,14 @@ yarn add react-native-link-lib
 pnpm add react-native-link-lib
 ```
 
+## 📚 文档
+
+项目文档位于 `doc/` 目录下，包含：
+- [INSTALLATION_GUIDE.md](doc/INSTALLATION_GUIDE.md) - 详细安装指南
+- [README_ANDROID.md](doc/README_ANDROID.md) - Android 平台特殊配置
+- [README.md](doc/README.md) - 基础文档pnpm add react-native-link-lib
+```
+
 ## 🚀 快速开始
 
 ### 1. 基础配置

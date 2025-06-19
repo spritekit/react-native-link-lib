@@ -48,6 +48,26 @@ repositories {
 dependencies {
     implementation "com.facebook.react:react-native:+"
     
-    // react-native-video
+    // React Native libraries
+    implementation project(':react-native-async-storage_async-storage')
+    implementation project(':react-native-picker_picker')
+    implementation project(':shopify_flash-list')
+    implementation project(':react-native-audio-recorder-player')
+    implementation project(':react-native-fast-image')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-pager-view')
+    implementation project(':react-native-popover-view')
+    implementation project(':react-native-safe-area-context')
+    implementation project(':react-native-screens')
+    implementation project(':react-native-svg')
+    implementation project(':react-native-update')
     implementation project(':react-native-video')
+    implementation project(':react-native-view-shot')
+    implementation project(':react-native-webview')
+    
+    // Additional dependencies for specific libraries
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 }

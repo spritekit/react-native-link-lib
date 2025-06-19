@@ -2,7 +2,14 @@
   "name": "react-native-link-lib",
   "version": "1.0.27",
   "description": "A library to manage React Native dependencies and native configurations",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "configure-podfile": "node scripts/auto-configure-podfile.js",
+    "postinstall": "node scripts/auto-configure-podfile.js"
+  },
+  "bin": {
+    "react-native-link-lib-configure": "scripts/auto-configure-podfile.js"
+  },
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
   "peerDependencies": {

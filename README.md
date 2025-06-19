@@ -76,12 +76,32 @@ pnpm add @react-native-async-storage/async-storage@1.23.1 @react-native-picker/p
 
 #### iOS 配置
 
+**🎉 零配置安装！** 本库已支持自动配置，无需手动修改 Podfile！
+
+安装完成后，库会自动运行 `postinstall` 脚本，自动在你的项目 `Podfile` 中添加必要的依赖配置。
+
+如果自动配置失败，你也可以手动运行：
 ```bash
-# 进入 iOS 目录并安装 pods
+# 方式1：使用 npm script
+npm run configure-podfile
+
+# 方式2：使用全局命令
+npx react-native-link-lib-configure
+
+# 方式3：直接运行脚本
+node node_modules/react-native-link-lib/scripts/auto-configure-podfile.js
+```
+
+然后运行：
+```bash
 cd ios && pod install
 ```
 
-**重要说明**：本库的 podspec 文件已经声明了所有必要的 pod 依赖，当您执行 `pod install` 时，CocoaPods 会自动安装所有相关的原生依赖。
+**自动配置说明：**
+- 脚本会自动检测你的项目结构
+- 自动在 `Podfile` 中添加所需的依赖配置
+- 会备份原始 `Podfile`，确保安全
+- 支持重复运行，会智能更新配置
 
 #### Android 配置
 

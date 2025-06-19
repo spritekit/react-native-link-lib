@@ -42,20 +42,15 @@ $ADD_CMD @react-native-async-storage/async-storage@1.23.1 \
          react-native-view-shot@3.8.0 \
          react-native-webview@13.10.5
 
-# iOS Pod 安装
-if [ -d "ios" ]; then
-    echo "🍎 安装 iOS Pod 依赖..."
-    cd ios
-    if command -v pod &> /dev/null; then
-        pod install
-        echo "✅ iOS Pod 依赖安装完成"
-    else
-        echo "⚠️  CocoaPods 未安装，请手动运行: cd ios && pod install"
-    fi
-    cd ..
+echo "✅ React Native Link Lib 依赖安装完成！"
+echo "🔧 正在自动配置 Podfile..."
+
+# 运行自动配置脚本
+if [ -f "node_modules/react-native-link-lib/scripts/auto-configure-podfile.js" ]; then
+    node node_modules/react-native-link-lib/scripts/auto-configure-podfile.js
 else
-    echo "ℹ️  未找到 ios 目录，跳过 Pod 安装"
+    echo "⚠️  自动配置脚本未找到，请手动运行: npx react-native-link-lib-configure"
 fi
 
-echo "✅ React Native Link Lib 依赖安装完成！"
 echo "📖 请查看 README.md 了解更多使用说明"
+echo "🚀 现在可以运行: cd ios && pod install"

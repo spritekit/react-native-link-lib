@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Copyright © 2020-2025 Ocean Galaxy Inc. All Rights Reserved.
  * @Description: React Native Link Library

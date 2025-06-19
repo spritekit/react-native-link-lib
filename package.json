@@ -5,14 +5,14 @@
   "scripts": {
     "test": "jest",
     "type-check": "tsc --noEmit",
-    "build": "bob build",
-    "prepare": "bob build",
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
     "release": "release-it",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepublishOnly": "npm run build",
     "doc": "rm -rf docs && npx typedoc"
   },
-  "main": "dist/cjs/src/index.js",
+  "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
     "react-native-video": "5.2.1"
@@ -32,15 +32,7 @@
   ],
   "author": "",
   "license": "MIT",
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      ["typescript", {"project": "tsconfig.build.json"}]
-    ]
-  },
+  
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",

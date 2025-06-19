@@ -55,7 +55,6 @@
 | react-native-safe-area-context | 安全区域 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-screens | 屏幕优化 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-svg | SVG支持 | [安装指南](./INSTALLATION_GUIDE.md) |
-| react-native-update | 热更新 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-video | 视频播放 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-view-shot | 截图功能 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-webview | WebView | [安装指南](./INSTALLATION_GUIDE.md) |

@@ -17,7 +17,6 @@
 - **react-native-safe-area-context** - 安全区域
 - **react-native-screens** - 屏幕导航优化
 - **react-native-svg** - SVG支持
-- **react-native-update** - 热更新
 - **react-native-video** - 视频播放
 - **react-native-view-shot** - 截图功能
 - **react-native-webview** - WebView组件
@@ -61,7 +60,6 @@ pod 'react-native-popover-view', :path => "#{prefix}/react-native-popover-view"
 pod 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
 pod 'RNScreens', :path => "#{prefix}/react-native-screens"
 pod 'RNSVG', :path => "#{prefix}/react-native-svg"
-pod 'react-native-update', :path => "#{prefix}/react-native-update"
 pod 'react-native-video', :path => "#{prefix}/react-native-video"
 pod 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
 pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
@@ -82,7 +80,6 @@ pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
 | react-native-safe-area-context | react-native-safe-area-context | 安全区域 |
 | react-native-screens | RNScreens | 屏幕优化 |
 | react-native-svg | RNSVG | SVG支持 |
-| react-native-update | react-native-update | 热更新 |
 | react-native-video | react-native-video | 视频播放 |
 | react-native-view-shot | react-native-view-shot | 截图功能 |
 | react-native-webview | react-native-webview | WebView |

@@ -17,7 +17,6 @@
 10. **react-native-safe-area-context** - 安全区域上下文
 11. **react-native-screens** - 屏幕导航优化
 12. **react-native-svg** - SVG图形支持
-13. **react-native-update** - 应用热更新
 14. **react-native-video** - 视频播放组件
 15. **react-native-view-shot** - 视图截图功能
 16. **react-native-webview** - WebView组件

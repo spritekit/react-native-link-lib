@@ -208,7 +208,6 @@ s.platforms = { :ios => "11.0" }
 - 🔄 **react-native-screens** - 屏幕导航 (v3.20.0)
 - 🔄 **react-native-storage** - 本地存储 (v1.0.1)
 - 🔄 **react-native-svg** - SVG支持 (v12.3.0)
-- 🔄 **react-native-update** - 热更新 (v10.18.0)
 - 🔄 **react-native-video** - 视频播放 (v5.2.1)
 - 🔄 **react-native-view-shot** - 视图截图 (v3.8.0)
 - 🔄 **react-native-webview** - WebView组件 (v13.10.5)

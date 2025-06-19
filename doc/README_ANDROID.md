@@ -17,7 +17,6 @@
 - **react-native-safe-area-context** - 安全区域
 - **react-native-screens** - 屏幕导航优化
 - **react-native-svg** - SVG支持
-- **react-native-update** - 热更新
 - **react-native-video** - 视频播放
 - **react-native-view-shot** - 截图功能
 - **react-native-webview** - WebView组件

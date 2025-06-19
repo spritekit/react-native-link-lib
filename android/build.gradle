@@ -54,7 +54,6 @@ dependencies {
     implementation project(':shopify_flash-list')
     implementation project(':react-native-audio-recorder-player')
     implementation project(':react-native-fast-image')
-    implementation project(':react-native-fs')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-pager-view')
     implementation project(':react-native-popover-view')

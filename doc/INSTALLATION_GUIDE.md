@@ -11,7 +11,6 @@
 3. **@shopify/flash-list** - 高性能列表组件
 4. **react-native-audio-recorder-player** - 音频录制和播放
 5. **react-native-fast-image** - 高性能图片加载
-6. **react-native-fs** - 文件系统操作
 7. **react-native-linear-gradient** - 线性渐变组件
 8. **react-native-pager-view** - 页面滑动视图
 9. **react-native-popover-view** - 弹出视图组件

@@ -11,7 +11,6 @@
 - **@shopify/flash-list** - 高性能列表组件
 - **react-native-audio-recorder-player** - 音频录制播放
 - **react-native-fast-image** - 高性能图片组件
-- **react-native-fs** - 文件系统操作
 - **react-native-linear-gradient** - 线性渐变
 - **react-native-pager-view** - 页面滑动组件
 - **react-native-popover-view** - 弹出视图
@@ -56,7 +55,6 @@ pod 'RNCPicker', :path => "#{prefix}/@react-native-picker/picker"
 pod 'RNFlashList', :path => "#{prefix}/@shopify/flash-list"
 pod 'RNAudioRecorderPlayer', :path => "#{prefix}/react-native-audio-recorder-player"
 pod 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
-pod 'RNFS', :path => "#{prefix}/react-native-fs"
 pod 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
 pod 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
 pod 'react-native-popover-view', :path => "#{prefix}/react-native-popover-view"
@@ -78,7 +76,6 @@ pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
 | @shopify/flash-list | RNFlashList | 高性能列表 |
 | react-native-audio-recorder-player | RNAudioRecorderPlayer | 音频录制播放 |
 | react-native-fast-image | RNFastImage | 高性能图片 |
-| react-native-fs | RNFS | 文件系统 |
 | react-native-linear-gradient | BVLinearGradient | 线性渐变 |
 | react-native-pager-view | react-native-pager-view | 页面滑动 |
 | react-native-popover-view | react-native-popover-view | 弹出视图 |

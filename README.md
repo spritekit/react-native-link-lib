@@ -202,7 +202,6 @@ s.platforms = { :ios => "11.0" }
 - 🔄 **@tencentcloud/chat-uikit-engine-react-native** - 腾讯云IM UI (v0.0.11)
 - 🔄 **react-native-audio-recorder-player** - 音频录制与播放 (v3.6.12)
 - 🔄 **react-native-fast-image** - 高性能图片加载 (v8.6.3)
-- 🔄 **react-native-fs** - 文件系统访问 (v2.20.0)
 - 🔄 **react-native-linear-gradient** - 线性渐变 (v2.8.3)
 - 🔄 **react-native-pager-view** - 分页视图 (v6.6.1)
 - 🔄 **react-native-safe-area-context** - 安全区域处理 (v4.5.0)

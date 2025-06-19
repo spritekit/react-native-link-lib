@@ -11,7 +11,6 @@
 - **@shopify/flash-list** - 高性能列表组件
 - **react-native-audio-recorder-player** - 音频录制播放
 - **react-native-fast-image** - 高性能图片组件
-- **react-native-fs** - 文件系统操作
 - **react-native-linear-gradient** - 线性渐变
 - **react-native-pager-view** - 页面滑动组件
 - **react-native-popover-view** - 弹出视图

@@ -49,7 +49,6 @@
 | @shopify/flash-list | 高性能列表 | [安装指南](./INSTALLATION_GUIDE.md#flashlist) |
 | react-native-audio-recorder-player | 音频录制播放 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-fast-image | 高性能图片 | [安装指南](./INSTALLATION_GUIDE.md#fastimage) |
-| react-native-fs | 文件系统 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-linear-gradient | 线性渐变 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-pager-view | 页面滑动 | [安装指南](./INSTALLATION_GUIDE.md) |
 | react-native-popover-view | 弹出视图 | [安装指南](./INSTALLATION_GUIDE.md) |

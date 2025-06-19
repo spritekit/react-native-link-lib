@@ -19,9 +19,10 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # React Native 核心依赖
-  s.dependency "React-Core"
-  
-  # 注意：第三方依赖通过 postinstall 脚本自动配置到项目的 Podfile 中
-  # 无需在此处声明，避免版本冲突和路径问题
+  s.dependency 'React-Core'
+  s.dependency 'SDWebImage', '~> 5.11.1'
+  s.dependency 'SDWebImageWebPCoder', '~> 0.8.4'
+  # 使用路径方式声明依赖
+  s.dependency 'RNCAsyncStorage', '~> 1.23.1'
 
 end

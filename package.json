@@ -3,9 +3,6 @@
   "version": "1.0.30",
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
-    "test": "node scripts/test-configuration.js",
-    "configure-podfile": "node scripts/configure-podfile-safe.js",
-    "postinstall": "node scripts/configure-podfile-safe.js 2>/dev/null || true"
   },
   "bin": {
     "react-native-link-lib-configure": "scripts/configure-podfile-safe.js"

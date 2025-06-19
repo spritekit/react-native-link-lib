@@ -1,9 +1,8 @@
 {
   "name": "react-native-link-lib",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "A library to manage React Native dependencies and native configurations",
-  "scripts": {
-  },
+  "scripts": {},
   "bin": {
     "react-native-link-lib-configure": "scripts/configure-podfile-safe.js"
   },

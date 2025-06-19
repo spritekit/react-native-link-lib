@@ -36,61 +36,61 @@
 
 ## 📦 安装
 
-### 1. 安装主库
+### 方法一：使用自动安装脚本（推荐）
 
-#### 使用 npm
 ```bash
+# 使用我们提供的安装脚本
+chmod +x ./scripts/install-deps.sh
+./scripts/install-deps.sh
+```
+
+### 方法二：手动安装
+
+#### 1. 安装主库
+
+```bash
+# 使用 npm
 npm install react-native-link-lib
-```
 
-#### 使用 yarn
-```bash
+# 使用 yarn
 yarn add react-native-link-lib
-```
 
-#### 使用 pnpm
-```bash
+# 使用 pnpm
 pnpm add react-native-link-lib
 ```
 
-### 2. 安装 Peer Dependencies
-
-本库使用 peerDependencies 方式管理原生依赖，需要手动安装以下依赖：
+#### 2. 安装 peer dependencies
 
 ```bash
-npm install @react-native-async-storage/async-storage@1.23.1 \
-            @react-native-picker/picker@2.7.7 \
-            @react-navigation/native@6.1.10 \
-            @shopify/flash-list@1.7.3 \
-            react-native-audio-recorder-player@3.6.12 \
-            react-native-fast-image@8.6.3 \
-            react-native-linear-gradient@2.8.3 \
-            react-native-pager-view@6.6.1 \
-            react-native-popover-view@6.1.0 \
-            react-native-safe-area-context@4.5.0 \
-            react-native-screens@3.20.0 \
-            react-native-storage@1.0.1 \
-            react-native-svg@12.3.0 \
-            react-native-video@5.2.1 \
-            react-native-view-shot@3.8.0 \
-            react-native-webview@13.10.5
+# 使用 npm
+npm install @react-native-async-storage/async-storage@1.23.1 @react-native-picker/picker@2.7.7 @react-navigation/native@6.1.10 @shopify/flash-list@1.7.3 react-native-audio-recorder-player@3.6.12 react-native-fast-image@8.6.3 react-native-linear-gradient@2.8.3 react-native-pager-view@6.6.1 react-native-popover-view@6.1.0 react-native-safe-area-context@4.5.0 react-native-screens@3.20.0 react-native-storage@1.0.1 react-native-svg@12.3.0 react-native-video@5.2.1 react-native-view-shot@3.8.0 react-native-webview@13.10.5
+
+# 使用 yarn
+yarn add @react-native-async-storage/async-storage@1.23.1 @react-native-picker/picker@2.7.7 @react-navigation/native@6.1.10 @shopify/flash-list@1.7.3 react-native-audio-recorder-player@3.6.12 react-native-fast-image@8.6.3 react-native-linear-gradient@2.8.3 react-native-pager-view@6.6.1 react-native-popover-view@6.1.0 react-native-safe-area-context@4.5.0 react-native-screens@3.20.0 react-native-storage@1.0.1 react-native-svg@12.3.0 react-native-video@5.2.1 react-native-view-shot@3.8.0 react-native-webview@13.10.5
+
+# 使用 pnpm
+pnpm add @react-native-async-storage/async-storage@1.23.1 @react-native-picker/picker@2.7.7 @react-navigation/native@6.1.10 @shopify/flash-list@1.7.3 react-native-audio-recorder-player@3.6.12 react-native-fast-image@8.6.3 react-native-linear-gradient@2.8.3 react-native-pager-view@6.6.1 react-native-popover-view@6.1.0 react-native-safe-area-context@4.5.0 react-native-screens@3.20.0 react-native-storage@1.0.1 react-native-svg@12.3.0 react-native-video@5.2.1 react-native-view-shot@3.8.0 react-native-webview@13.10.5
 ```
 
-### 3. 自动链接配置
+### 平台特定配置
 
-从 React Native 0.60+ 开始，大部分原生依赖会自动链接。本库已包含 `react-native.config.js` 配置文件，确保所有依赖正确链接。
-
-### 4. iOS 配置
-
-对于 iOS 项目，运行以下命令安装 Pod 依赖：
+#### iOS 配置
 
 ```bash
+# 进入 iOS 目录并安装 pods
 cd ios && pod install
 ```
 
-### 5. Android 配置
+**重要说明**：本库的 podspec 文件已经声明了所有必要的 pod 依赖，当您执行 `pod install` 时，CocoaPods 会自动安装所有相关的原生依赖。
 
-Android 项目通常无需额外配置，自动链接会处理大部分依赖。如遇到问题，请参考各个库的官方文档。
+#### Android 配置
+
+对于 Android，React Native 0.60+ 的自动链接功能会处理大部分依赖。如果遇到问题，请检查：
+
+1. `android/settings.gradle` 中是否包含了所有必要的项目
+2. `MainApplication.java` 中是否正确导入了包
+
+如果自动链接失败，可以手动添加相关配置。
 
 ## 🔧 快速安装脚本
 
@@ -158,6 +158,28 @@ function MyApp() {
 - [iOS 配置](./doc/README_IOS.md)
 
 ## 🔍 故障排除
+
+### iOS Pod 安装问题
+
+如果遇到 iOS pod 安装问题，请检查：
+
+1. **确认依赖已安装**：确保所有 peerDependencies 都已正确安装
+2. **清理 Pod 缓存**：
+   ```bash
+   cd ios
+   rm -rf Pods Podfile.lock
+   pod install
+   ```
+3. **检查 CocoaPods 版本**：确保使用较新版本的 CocoaPods
+   ```bash
+   pod --version
+   sudo gem install cocoapods
+   ```
+4. **重新安装依赖**：
+   ```bash
+   rm -rf node_modules && npm install
+   cd ios && pod install
+   ```
 
 ### 常见问题
 

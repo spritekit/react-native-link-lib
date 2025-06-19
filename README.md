@@ -36,7 +36,37 @@
 
 ## 📦 安装
 
-### 方法一：使用自动安装脚本（推荐）
+### 零配置安装 (推荐)
+
+```bash
+npm install react-native-link-lib
+# 或
+yarn add react-native-link-lib
+```
+
+安装完成后，库会自动配置您的 iOS Podfile。新版本包含了增强的错误处理和调试信息，如果自动配置失败，您可以手动运行：
+
+```bash
+npx react-native-link-lib-configure
+```
+
+然后安装 iOS 依赖：
+
+```bash
+cd ios && pod install
+```
+
+### 故障排除
+
+如果遇到配置问题，新的配置脚本会提供详细的调试信息，包括：
+- 项目根目录检测过程
+- Podfile 查找路径
+- 目录结构分析
+- 具体的错误原因
+
+这些信息将帮助您快速定位和解决问题。
+
+### 方法二：使用自动安装脚本
 
 ```bash
 # 使用我们提供的安装脚本
@@ -44,7 +74,7 @@ chmod +x ./scripts/install-deps.sh
 ./scripts/install-deps.sh
 ```
 
-### 方法二：手动安装
+### 方法三：手动安装
 
 #### 1. 安装主库
 

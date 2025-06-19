@@ -5,7 +5,7 @@
   "scripts": {},
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-picker/picker": "2.7.7",
     "@react-navigation/native": "6.1.10",
@@ -21,6 +21,7 @@
     "react-native-svg": "12.3.0",
     "react-native-video": "5.2.1",
     "react-native-view-shot": "3.8.0",
-    "react-native-webview": "13.10.5"
+    "react-native-webview": "13.10.5",
+    "react-native": ">=0.60.0"
   }
 }

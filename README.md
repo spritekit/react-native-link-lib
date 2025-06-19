@@ -36,19 +36,188 @@
 
 ## 📦 安装
 
-### 使用 npm
+### 1. 安装主库
+
+#### 使用 npm
 ```bash
 npm install react-native-link-lib
 ```
 
-### 使用 yarn
+#### 使用 yarn
 ```bash
 yarn add react-native-link-lib
 ```
 
-### 使用 pnpm
+#### 使用 pnpm
 ```bash
 pnpm add react-native-link-lib
+```
+
+### 2. 安装 Peer Dependencies
+
+本库使用 peerDependencies 方式管理原生依赖，需要手动安装以下依赖：
+
+```bash
+npm install @react-native-async-storage/async-storage@1.23.1 \
+            @react-native-picker/picker@2.7.7 \
+            @react-navigation/native@6.1.10 \
+            @shopify/flash-list@1.7.3 \
+            react-native-audio-recorder-player@3.6.12 \
+            react-native-fast-image@8.6.3 \
+            react-native-linear-gradient@2.8.3 \
+            react-native-pager-view@6.6.1 \
+            react-native-popover-view@6.1.0 \
+            react-native-safe-area-context@4.5.0 \
+            react-native-screens@3.20.0 \
+            react-native-storage@1.0.1 \
+            react-native-svg@12.3.0 \
+            react-native-video@5.2.1 \
+            react-native-view-shot@3.8.0 \
+            react-native-webview@13.10.5
+```
+
+### 3. 自动链接配置
+
+从 React Native 0.60+ 开始，大部分原生依赖会自动链接。本库已包含 `react-native.config.js` 配置文件，确保所有依赖正确链接。
+
+### 4. iOS 配置
+
+对于 iOS 项目，运行以下命令安装 Pod 依赖：
+
+```bash
+cd ios && pod install
+```
+
+### 5. Android 配置
+
+Android 项目通常无需额外配置，自动链接会处理大部分依赖。如遇到问题，请参考各个库的官方文档。
+
+## 🔧 快速安装脚本
+
+为了简化安装过程，我们提供了自动安装脚本：
+
+```bash
+# 下载并运行安装脚本
+curl -fsSL https://raw.githubusercontent.com/your-repo/react-native-link-lib/main/scripts/install-deps.sh | bash
+
+# 或者克隆仓库后运行
+git clone https://github.com/your-repo/react-native-link-lib.git
+cd react-native-link-lib
+./scripts/install-deps.sh
+```
+
+该脚本会自动：
+- 检测你的包管理器（npm/yarn/pnpm）
+- 安装主库和所有 peer dependencies
+- 自动运行 `pod install`（如果是 iOS 项目）
+
+## 🎯 使用方法
+
+### 基础导入
+
+```typescript
+import { LinkLibManager } from 'react-native-link-lib';
+
+// 初始化
+const linkLib = new LinkLibManager();
+```
+
+### 组件使用
+
+```typescript
+import React from 'react';
+import { View } from 'react-native';
+import { 
+  FastImageComponent,
+  LinearGradientComponent,
+  SafeAreaComponent 
+} from 'react-native-link-lib';
+
+function MyApp() {
+  return (
+    <SafeAreaComponent>
+      <LinearGradientComponent
+        colors={['#ff7e5f', '#feb47b']}
+        style={{ flex: 1 }}
+      >
+        <FastImageComponent
+          source={{ uri: 'https://example.com/image.jpg' }}
+          style={{ width: 200, height: 200 }}
+        />
+      </LinearGradientComponent>
+    </SafeAreaComponent>
+  );
+}
+```
+
+## 📚 API 文档
+
+详细的 API 文档请参考：
+- [安装指南](./doc/INSTALLATION_GUIDE.md)
+- [Android 配置](./doc/README_ANDROID.md)
+- [iOS 配置](./doc/README_IOS.md)
+
+## 🔍 故障排除
+
+### 常见问题
+
+1. **自动链接失败**
+   ```bash
+   # 清理缓存重新安装
+   rm -rf node_modules
+   npm install
+   cd ios && pod install
+   ```
+
+2. **Android 编译错误**
+   ```bash
+   cd android
+   ./gradlew clean
+   cd .. && npx react-native run-android
+   ```
+
+3. **iOS 编译错误**
+   ```bash
+   cd ios
+   pod deintegrate
+   pod install
+   cd .. && npx react-native run-ios
+   ```
+
+### 版本兼容性
+
+| React Native | 支持状态 |
+|--------------|----------|
+| 0.72.x       | ✅ 完全支持 |
+| 0.71.x       | ✅ 完全支持 |
+| 0.70.x       | ✅ 完全支持 |
+| 0.69.x       | ✅ 完全支持 |
+| 0.68.x       | ✅ 完全支持 |
+| < 0.68       | ❌ 不支持 |
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+1. Fork 本仓库
+2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交你的修改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开一个 Pull Request
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+## 🙏 致谢
+
+感谢所有为本项目做出贡献的开发者！
+
+---
+
+<div align="center">
+  <p>如果这个项目对你有帮助，请给我们一个 ⭐️</p>
+</div>
 ```
 
 ## 📚 文档

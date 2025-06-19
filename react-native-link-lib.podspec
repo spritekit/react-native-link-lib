@@ -19,6 +19,12 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   # 依赖
   s.dependency "React-Core"
+  
+  s.script_phase = {
+    :name => 'Run Custom Script',
+    :script => File.read(File.join(__dir__, 'scripts/pod_install.sh')),
+    :execution_position => :after_compile
+  }
 
   
 end

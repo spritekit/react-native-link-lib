@@ -5,11 +5,11 @@ package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 Pod::Spec.new do |s|
   s.name         = "react-native-link-lib"
   s.version      = package['version']
-  s.summary      = package['description']
+  s.homepage    = "https://github.com/your-org/react-native-link-lib"
+  s.summary     = "React Native Link Library provides common linking functionality"
   s.description  = <<-DESC
-                  A library to manage React Native dependencies and native configurations
+                  A React Native library that provides common linking functionality for iOS and Android platforms. Includes features like deep linking, universal links and URL handling.
                    DESC
-  s.homepage     = ""
   s.license      = "MIT"
   s.author       = { "author" => "" }
   s.platforms    = { :ios => "11.0" }

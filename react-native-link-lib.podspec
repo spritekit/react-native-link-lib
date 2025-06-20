@@ -24,8 +24,7 @@ Pod::Spec.new do |s|
   s.dependency 'SDWebImageWebPCoder', '~> 0.8.4'
   # 本地路径依赖声明
   prefix = 'react-native/node_modules'
-  s.dependency 'RNCAsyncStorage', '~> 1.0.0'
+  s.dependency 'RNCAsyncStorage'
   s.dependency 'RNFastImage'
-
 
 end

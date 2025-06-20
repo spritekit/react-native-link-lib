@@ -1,5 +1,6 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+source 'git@codeup.aliyun.com:xhey/ios/XHSpecs.git'
+source 'https://github.com/aliyun/aliyun-specs.git'
 
 require_relative 'react-native/node_modules/react-native/scripts/react_native_pods'
 require_relative 'react-native/node_modules/@react-native-community/cli-platform-ios/native_modules'
@@ -41,9 +42,8 @@ target 'react-native-link-lib-sample' do
         config.build_settings['SWIFT_VERSION'] = '5.0'
       end
     end
+    
+    react_native_post_install(installer)
   end
-  
- 
- 
 end
 

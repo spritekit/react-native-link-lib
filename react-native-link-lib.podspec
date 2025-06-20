@@ -22,10 +22,9 @@ Pod::Spec.new do |s|
   s.dependency 'React-Core'
   s.dependency 'SDWebImage', '~> 5.11.1'
   s.dependency 'SDWebImageWebPCoder', '~> 0.8.4'
-  # 使用路径方式声明依赖
-  prefix = 'react-native/node_modules'
-  s.dependency 'RNCAsyncStorage', {:path => "#{prefix}/@react-native-async-storage/async-storage"}
-  s.dependency 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
+  # 标准依赖声明方式
+  s.dependency 'RNCAsyncStorage'
+  s.dependency 'RNFastImage'
 
 
 end

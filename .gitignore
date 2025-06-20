@@ -1,6 +1,6 @@
 # Dependency directories
 node_modules/
-
+/ios/react-native-link-lib-sample/react-native/package-lock.json
 # Build directories
 lib/
 dist/
@@ -39,6 +39,7 @@ yarn-error.log*
 
 # CocoaPods
 /Pods/
+/ios/react-native-link-lib-sample
 
 # Xcode
 *.xcuserstate

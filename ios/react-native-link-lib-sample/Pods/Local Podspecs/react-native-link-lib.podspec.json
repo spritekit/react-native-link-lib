@@ -1,0 +1,32 @@
+{
+  "name": "react-native-link-lib",
+  "version": "1.0.31",
+  "homepage": "https://github.com/author/react-native-link-lib.git",
+  "summary": "React Native Link Library provides common linking functionality",
+  "description": "A React Native library that provides common linking functionality for iOS and Android platforms. Includes features like deep linking, universal links and URL handling.",
+  "license": "MIT",
+  "authors": {
+    "author": ""
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/author/react-native-link-lib.git",
+    "tag": "1.0.31"
+  },
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "requires_arc": true,
+  "dependencies": {
+    "React-Core": [],
+    "SDWebImage": [
+      "~> 5.11.1"
+    ],
+    "SDWebImageWebPCoder": [
+      "~> 0.8.4"
+    ],
+    "RNCAsyncStorage": [
+      "~> 1.23.1"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'react-native-link-lib-sample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for react-native-link-lib-sample
+
+    prefix = 'react-native/node_modules'
+  pod 'react-native-link-lib', :path => "#{prefix}/react-native-link-lib"
+
+end

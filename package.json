@@ -4,7 +4,8 @@
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json",
-    "clean": "rm -rf dist node_modules package-lock.json",
+    "clean": "rm -rf dist",
+    "clean:all": "rm -rf dist node_modules package-lock.json",
     "prepublishOnly": "npm run clean && npm run build",
     "postinstall": "node scripts/postinstall.js",
     "lint": "eslint src --ext .ts,.tsx",
@@ -38,10 +39,9 @@
     "react-native-view-shot": "3.8.0",
     "react-native-webview": "13.10.5"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {
     "@react-native-community/cli": "^18.0.0",
-    "@types/node": "^20.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
   }
 }

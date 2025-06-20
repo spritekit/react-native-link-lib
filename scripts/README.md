@@ -64,24 +64,58 @@ node scripts/test-auto-config.js
 
 ### 手动配置（备用）
 
-如果需要手动配置，可以编辑 `podfile-config.json`:
+如果需要手动配置，可以编辑 `podfile-config.json`，该文件支持两种配置方式：
+
+#### 1. Pod 名称映射表
+
+通过 `podNameMapping` 字段配置 Pod 名称到包名的映射关系：
+
 ```json
 {
-  "PodName": "package-name",
-  "AnotherPod": "another-package"
+  "podNameMapping": {
+    "RNScreens": "react-native-screens",
+    "RNSVG": "react-native-svg",
+    "RNCAsyncStorage": "@react-native-async-storage/async-storage"
+  }
 }
 ```
+
+这个配置用于当自动扫描找到 peerDependencies 时，将包名映射为正确的 Pod 名称。
+
+#### 2. 自定义 Pod 配置
+
+通过 `customPods` 字段配置完全自定义的 Pod 配置：
+
+```json
+{
+  "customPods": {
+    "PodName": "package-name",
+    "AnotherPod": "another-package"
+  }
+}
+```
+
+当没有找到 peerDependencies 时，会使用这个配置。
 
 ## 配置文件格式
 
-### 自动生成的配置格式
+### 完整的配置文件格式
 ```json
 {
-  "RNScreens": "react-native-screens",
-  "RNSVG": "react-native-svg",
-  "RNCAsyncStorage": "@react-native-async-storage/async-storage"
+  "podNameMapping": {
+    "RNScreens": "react-native-screens",
+    "RNSVG": "react-native-svg",
+    "RNCAsyncStorage": "@react-native-async-storage/async-storage"
+  },
+  "customPods": {
+    "PodName": "package-name",
+    "AnotherPod": "another-package"
+  }
 }
 ```
+
+- `podNameMapping`: 用于配置 Pod 名称到包名的映射关系，在自动扫描 peerDependencies 时使用
+- `customPods`: 用于配置完全自定义的 Pod 配置，当没有找到 peerDependencies 时使用
 
 ### Podspec 名称提取规则
 

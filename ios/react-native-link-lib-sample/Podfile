@@ -8,6 +8,21 @@ target 'react-native-link-lib-sample' do
 
     prefix = 'react-native/node_modules'
   pod 'react-native-link-lib', :path => "#{prefix}/react-native-link-lib"
+  pod 'RNCAsyncStorage', :path => "#{prefix}/@react-native-async-storage/async-storage"
+  pod 'RNCPicker', :path => "#{prefix}/@react-native-picker/picker"
+  pod 'RNFlashList', :path => "#{prefix}/@shopify/flash-list"
+  pod 'RNAudioRecorderPlayer', :path => "#{prefix}/react-native-audio-recorder-player"
+  pod 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
+  pod 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
+  pod 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
+  pod 'react-native-popover-view', :path => "#{prefix}/react-native-popover-view"
+  pod 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
+  pod 'RNScreens', :path => "#{prefix}/react-native-screens"
+  pod 'react-native-storage', :path => "#{prefix}/react-native-storage"
+  pod 'RNSVG', :path => "#{prefix}/react-native-svg"
+  pod 'react-native-video', :path => "#{prefix}/react-native-video"
+  pod 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
+  pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
  
 end
 

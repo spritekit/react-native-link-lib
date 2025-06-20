@@ -1,3 +1,23 @@
 {
-
+  "podNameMapping": {
+    "RNScreens": "react-native-screens",
+    "react-native-safe-area-context": "react-native-safe-area-context",
+    "BVLinearGradient": "react-native-linear-gradient",
+    "RNSVG": "react-native-svg",
+    "react-native-view-shot": "react-native-view-shot",
+    "react-native-webview": "react-native-webview",
+    "RNCPicker": "@react-native-picker/picker",
+    "RNCAsyncStorage": "@react-native-async-storage/async-storage",
+    "react-native-video": "react-native-video",
+    "react-native-pager-view": "react-native-pager-view",
+    "RNFastImage": "react-native-fast-image",
+    "RNFlashList": "@shopify/flash-list",
+    "RNAudioRecorderPlayer": "react-native-audio-recorder-player",
+    "react-native-storage": "react-native-storage",
+    "react-native-popover-view": "react-native-popover-view"
+  },
+  "customPods": {
+    "_注释": "这里可以添加自定义的Pod配置，当没有找到peerDependencies时会使用这个配置",
+    "示例": "示例包名"
+  }
 }

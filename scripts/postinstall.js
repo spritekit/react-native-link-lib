@@ -115,7 +115,8 @@ function getMainProjectPeerDependencies() {
       if (packageJson.name === 'react-native-link-lib' && packageJson.peerDependencies) {
         console.log(`找到主项目配置: ${testPackageJson}`);
         return Object.keys(packageJson.peerDependencies).filter(dep => 
-          dep.startsWith('react-native') || dep.startsWith('@react-native') || dep.startsWith('@shopify')
+          // 过滤掉 react-native 官方库
+          (dep !== 'react-native' && (dep.startsWith('react-native') || dep.startsWith('@react-native') || dep.startsWith('@shopify')))
         );
       }
     }
@@ -132,6 +133,22 @@ function getMainProjectPeerDependencies() {
  * @returns {Object} - Pod名称到包名的映射
  */
 function createPodNameMapping() {
+  try {
+    // 从配置文件中读取映射表
+    const configPath = path.join(__dirname, 'podfile-config.json');
+    if (fs.existsSync(configPath)) {
+      const config = require(configPath);
+      if (config.podNameMapping && Object.keys(config.podNameMapping).length > 0) {
+        console.log('使用配置文件中的Pod名称映射表');
+        return config.podNameMapping;
+      }
+    }
+  } catch (error) {
+    console.log('读取配置文件失败，使用默认映射表', error.message);
+  }
+  
+  // 如果配置文件不存在或读取失败，使用默认映射表
+  console.log('使用默认Pod名称映射表');
   return {
     'RNScreens': 'react-native-screens',
     'react-native-safe-area-context': 'react-native-safe-area-context',
@@ -161,7 +178,21 @@ function autoGenerateConfig() {
   
   if (peerDependencies.length === 0) {
     console.log('未找到peerDependencies，使用默认配置');
-    return require('./podfile-config.json');
+    try {
+      const configPath = path.join(__dirname, 'podfile-config.json');
+      if (fs.existsSync(configPath)) {
+        const config = require(configPath);
+        // 如果配置文件中有自定义的Pod配置，直接使用
+        if (config.customPods && Object.keys(config.customPods).length > 0) {
+          console.log('使用配置文件中的自定义Pod配置');
+          return config.customPods;
+        }
+      }
+    } catch (error) {
+      console.log('读取配置文件失败', error.message);
+    }
+    // 如果没有自定义配置，返回空对象
+    return {};
   }
   
   console.log(`找到 ${peerDependencies.length} 个peerDependencies:`, peerDependencies);
@@ -171,6 +202,12 @@ function autoGenerateConfig() {
   const autoConfig = {};
   
   peerDependencies.forEach(dep => {
+    // 忽略 react-native 官方库
+    if (dep === 'react-native') {
+      console.log(`忽略官方库: ${dep}`);
+      return;
+    }
+    
     // 查找对应的Pod名称
     const podName = Object.keys(podNameMapping).find(pod => podNameMapping[pod] === dep);
     

@@ -20,11 +20,4 @@ Pod::Spec.new do |s|
 
   # React Native 核心依赖
   s.dependency 'React-Core'
-  s.dependency 'SDWebImage', '~> 5.11.1'
-  s.dependency 'SDWebImageWebPCoder', '~> 0.8.4'
-  # 标准依赖声明方式
-  s.dependency 'RNCAsyncStorage'
-  s.dependency 'RNFastImage'
-
-
 end

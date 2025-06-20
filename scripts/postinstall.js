@@ -168,27 +168,6 @@ function createPodNameMapping() {
 }
 
 /**
- * 检查依赖包是否有.podspec文件
- * @param {string} packagePath - 依赖包路径
- * @returns {boolean} - 是否有.podspec文件
- */
-function hasPodspecFile(packagePath) {
-  if (!fs.existsSync(packagePath)) {
-    console.log(`依赖包不存在: ${packagePath}`);
-    return false;
-  }
-  
-  try {
-    // 查找.podspec文件
-    const files = fs.readdirSync(packagePath);
-    return files.some(file => file.endsWith('.podspec'));
-  } catch (error) {
-    console.log(`检查podspec文件失败: ${packagePath}`, error.message);
-    return false;
-  }
-}
-
-/**
  * 自动生成Pod配置
  * @returns {Object} - 自动生成的配置对象
  */
@@ -220,21 +199,11 @@ function autoGenerateConfig() {
   // 使用预定义的Pod名称映射
   const podNameMapping = createPodNameMapping();
   const autoConfig = {};
-  const nodeModulesPath = path.resolve(process.cwd(), 'node_modules');
   
   peerDependencies.forEach(dep => {
     // 忽略 react-native 官方库
     if (dep === 'react-native') {
       console.log(`忽略官方库: ${dep}`);
-      return;
-    }
-    
-    // 检查依赖包是否有.podspec文件
-    const depPath = path.join(nodeModulesPath, dep);
-    const hasPodspec = hasPodspecFile(depPath);
-    
-    if (!hasPodspec) {
-      console.log(`依赖包没有podspec文件，跳过: ${dep}`);
       return;
     }
     
@@ -295,7 +264,6 @@ module.exports = {
   findPodfile,
   getDependenciesFromPackageJson,
   scanPodspecFiles,
-  hasPodspecFile,
   getMainProjectPeerDependencies,
   createPodNameMapping,
   autoGenerateConfig,

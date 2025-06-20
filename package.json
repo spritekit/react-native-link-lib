@@ -7,7 +7,10 @@
     "clean": "rm -rf dist",
     "clean:all": "rm -rf dist node_modules package-lock.json",
     "prepublishOnly": "npm run clean && npm run build",
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node scripts/auto-config.js",
+    "ios-config": "node scripts/podfile-config.js",
+    "android-config": "node scripts/gradle-config.js",
+    "auto-config": "node scripts/auto-config.js",
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },

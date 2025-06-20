@@ -18,15 +18,64 @@ function findPodfile(startDir) {
   // 查找当前目录下的Podfile
   const currentDirPodfile = path.resolve(baseDir, 'Podfile');
   if (fs.existsSync(currentDirPodfile)) {
+    console.log(`找到Podfile在当前目录: ${currentDirPodfile}`);
     return currentDirPodfile;
   }
   
   // 查找ios目录下的Podfile
   const iosDirPodfile = path.resolve(baseDir, 'ios', 'Podfile');
   if (fs.existsSync(iosDirPodfile)) {
+    console.log(`找到Podfile在ios目录: ${iosDirPodfile}`);
     return iosDirPodfile;
   }
   
+  // 向上查找两级目录
+  const parentDir = path.resolve(baseDir, '..');
+  const parentDirPodfile = path.resolve(parentDir, 'Podfile');
+  if (fs.existsSync(parentDirPodfile)) {
+    console.log(`找到Podfile在父目录: ${parentDirPodfile}`);
+    return parentDirPodfile;
+  }
+  
+  const grandParentDir = path.resolve(baseDir, '..', '..');
+  const grandParentDirPodfile = path.resolve(grandParentDir, 'Podfile');
+  if (fs.existsSync(grandParentDirPodfile)) {
+    console.log(`找到Podfile在祖父目录: ${grandParentDirPodfile}`);
+    return grandParentDirPodfile;
+  }
+  
+  // 查找ios子目录下的所有子目录
+  try {
+    const iosDir = path.resolve(baseDir, 'ios');
+    if (fs.existsSync(iosDir) && fs.statSync(iosDir).isDirectory()) {
+      console.log(`检查ios目录: ${iosDir}`);
+      const iosDirEntries = fs.readdirSync(iosDir);
+      
+      for (const entry of iosDirEntries) {
+        const entryPath = path.resolve(iosDir, entry);
+        if (fs.statSync(entryPath).isDirectory()) {
+          const subDirPodfile = path.resolve(entryPath, 'Podfile');
+          if (fs.existsSync(subDirPodfile)) {
+            console.log(`找到Podfile在ios子目录: ${subDirPodfile}`);
+            return subDirPodfile;
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.log(`搜索ios子目录时出错: ${error.message}`);
+  }
+  
+  // 特定路径检查 - 示例项目
+  const samplePodfile = path.resolve(baseDir, 'ios', 'react-native-link-lib-sample', 'Podfile');
+  if (fs.existsSync(samplePodfile)) {
+    console.log(`找到示例项目Podfile: ${samplePodfile}`);
+    return samplePodfile;
+  }
+  
+  console.log(`当前工作目录: ${process.cwd()}`);
+  console.log(`搜索目录: ${baseDir}`);
+  console.log('未能找到Podfile文件');
   return null;
 }
 

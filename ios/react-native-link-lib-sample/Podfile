@@ -5,9 +5,10 @@ target 'react-native-link-lib-sample' do
   use_frameworks!
 
   # Pods for react-native-link-lib-sample
+
     prefix = 'react-native/node_modules'
   pod 'react-native-link-lib', :path => "#{prefix}/react-native-link-lib"
-
+ 
 end
 
 

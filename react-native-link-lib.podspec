@@ -20,5 +20,15 @@ Pod::Spec.new do |s|
 
   # React Native 核心依赖
   s.dependency 'React-Core'
+  s.dependency 'React-RCTImage'
+  s.dependency 'RCT-Folly'
  
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '5.0'
+    end
+  end
 end

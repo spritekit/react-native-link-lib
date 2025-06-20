@@ -8,74 +8,24 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * 查找Podfile文件
- * @param {string} [startDir] - 开始查找的目录，默认为当前工作目录
- * @returns {string|null} - Podfile文件路径或null
+ * 递归向上查找Podfile文件
+ * @param {string} startPath - 开始查找的路径
+ * @returns {string|null} - 找到的Podfile路径或null
  */
-function findPodfile(startDir) {
-  const baseDir = startDir || process.cwd();
+function findPodfile(startPath) {
+  let currentPath = path.resolve(startPath);
   
-  // 查找当前目录下的Podfile
-  const currentDirPodfile = path.resolve(baseDir, 'Podfile');
-  if (fs.existsSync(currentDirPodfile)) {
-    console.log(`找到Podfile在当前目录: ${currentDirPodfile}`);
-    return currentDirPodfile;
-  }
-  
-  // 查找ios目录下的Podfile
-  const iosDirPodfile = path.resolve(baseDir, 'ios', 'Podfile');
-  if (fs.existsSync(iosDirPodfile)) {
-    console.log(`找到Podfile在ios目录: ${iosDirPodfile}`);
-    return iosDirPodfile;
-  }
-  
-  // 向上查找两级目录
-  const parentDir = path.resolve(baseDir, '..');
-  const parentDirPodfile = path.resolve(parentDir, 'Podfile');
-  if (fs.existsSync(parentDirPodfile)) {
-    console.log(`找到Podfile在父目录: ${parentDirPodfile}`);
-    return parentDirPodfile;
-  }
-  
-  const grandParentDir = path.resolve(baseDir, '..', '..');
-  const grandParentDirPodfile = path.resolve(grandParentDir, 'Podfile');
-  if (fs.existsSync(grandParentDirPodfile)) {
-    console.log(`找到Podfile在祖父目录: ${grandParentDirPodfile}`);
-    return grandParentDirPodfile;
-  }
-  
-  // 查找ios子目录下的所有子目录
-  try {
-    const iosDir = path.resolve(baseDir, 'ios');
-    if (fs.existsSync(iosDir) && fs.statSync(iosDir).isDirectory()) {
-      console.log(`检查ios目录: ${iosDir}`);
-      const iosDirEntries = fs.readdirSync(iosDir);
-      
-      for (const entry of iosDirEntries) {
-        const entryPath = path.resolve(iosDir, entry);
-        if (fs.statSync(entryPath).isDirectory()) {
-          const subDirPodfile = path.resolve(entryPath, 'Podfile');
-          if (fs.existsSync(subDirPodfile)) {
-            console.log(`找到Podfile在ios子目录: ${subDirPodfile}`);
-            return subDirPodfile;
-          }
-        }
-      }
+  while (currentPath !== path.dirname(currentPath)) {
+    const podfilePath = path.join(currentPath, 'Podfile');
+    
+    if (fs.existsSync(podfilePath)) {
+      return podfilePath;
     }
-  } catch (error) {
-    console.log(`搜索ios子目录时出错: ${error.message}`);
+    
+    // 向上一级目录
+    currentPath = path.dirname(currentPath);
   }
   
-  // 特定路径检查 - 示例项目
-  const samplePodfile = path.resolve(baseDir, 'ios', 'react-native-link-lib-sample', 'Podfile');
-  if (fs.existsSync(samplePodfile)) {
-    console.log(`找到示例项目Podfile: ${samplePodfile}`);
-    return samplePodfile;
-  }
-  
-  console.log(`当前工作目录: ${process.cwd()}`);
-  console.log(`搜索目录: ${baseDir}`);
-  console.log('未能找到Podfile文件');
   return null;
 }
 
@@ -118,18 +68,28 @@ function scanPodspecFiles(nodeModulesPath, dependencies) {
     }
     
     // 查找.podspec文件
-    try {
-      const files = fs.readdirSync(depPath);
-      const podspecFile = files.find(file => file.endsWith('.podspec'));
+    const files = fs.readdirSync(depPath);
+    const podspecFile = files.find(file => file.endsWith('.podspec'));
+    
+    if (podspecFile) {
+      const podspecPath = path.join(depPath, podspecFile);
+      const podspecContent = fs.readFileSync(podspecPath, 'utf8');
       
-      if (podspecFile) {
-        // 直接使用podspec文件名（去掉.podspec后缀）作为Pod名称
-        const podName = podspecFile.replace('.podspec', '');
+      // 从podspec文件中提取Pod名称
+      const nameMatch = podspecContent.match(/s\.name\s*=\s*['"]([^'"]+)['"]/)
+        || podspecContent.match(/Pod::Spec\.new\s*do\s*\|s\|[\s\S]*?s\.name\s*=\s*['"]([^'"]+)['"]/)
+        || podspecContent.match(/spec\.name\s*=\s*['"]([^'"]+)['"]/)
+        || podspecContent.match(/name:\s*['"]([^'"]+)['"]/)
+        || podspecContent.match(/name\s*=\s*['"]([^'"]+)['"]/)
+        || podspecContent.match(/^\s*['"]([^'"]+)['"]/);
+      
+      if (nameMatch) {
+        const podName = nameMatch[1];
         podConfigs[podName] = dep;
         console.log(`发现Pod配置: ${podName} -> ${dep}`);
+      } else {
+        console.log(`无法从${podspecFile}中提取Pod名称`);
       }
-    } catch (error) {
-      console.log(`扫描依赖包出错: ${dep}, 错误: ${error.message}`);
     }
   });
   
@@ -168,27 +128,24 @@ function getMainProjectPeerDependencies() {
 }
 
 /**
- * 创建Pod名称到包名的映射
+ * 创建Pod名称映射表
  * @returns {Object} - Pod名称到包名的映射
  */
 function createPodNameMapping() {
   return {
-    // React Native 社区库
     'RNScreens': 'react-native-screens',
     'react-native-safe-area-context': 'react-native-safe-area-context',
-    'react-native-webview': 'react-native-webview',
-    'react-native-video': 'react-native-video',
-    'react-native-view-shot': 'react-native-view-shot',
-    'react-native-pager-view': 'react-native-pager-view',
-    'RNCAsyncStorage': '@react-native-async-storage/async-storage',
-    'RNCPicker': '@react-native-picker/picker',
     'BVLinearGradient': 'react-native-linear-gradient',
     'RNSVG': 'react-native-svg',
+    'react-native-view-shot': 'react-native-view-shot',
+    'react-native-webview': 'react-native-webview',
+    'RNCPicker': '@react-native-picker/picker',
+    'RNCAsyncStorage': '@react-native-async-storage/async-storage',
+    'react-native-video': 'react-native-video',
+    'react-native-pager-view': 'react-native-pager-view',
     'RNFastImage': 'react-native-fast-image',
     'RNFlashList': '@shopify/flash-list',
     'RNAudioRecorderPlayer': 'react-native-audio-recorder-player',
-    
-    // 其他库
     'react-native-storage': 'react-native-storage',
     'react-native-popover-view': 'react-native-popover-view'
   };
@@ -207,55 +164,27 @@ function autoGenerateConfig() {
     return require('./podfile-config.json');
   }
   
-  console.log(`找到 ${peerDependencies.length} 个peerDependencies`);
+  console.log(`找到 ${peerDependencies.length} 个peerDependencies:`, peerDependencies);
   
   // 使用预定义的Pod名称映射
   const podNameMapping = createPodNameMapping();
   const autoConfig = {};
   
-  // 查找node_modules路径
-  const nodeModulesPath = path.resolve(process.cwd(), 'node_modules');
-  let podspecConfigs = {};
-  
-  // 如果node_modules目录存在，尝试扫描podspec文件
-  if (fs.existsSync(nodeModulesPath)) {
-    podspecConfigs = scanPodspecFiles(nodeModulesPath, peerDependencies);
-    console.log(`从podspec文件扫描到 ${Object.keys(podspecConfigs).length} 个Pod配置`);
-  }
-  
-  // 确保添加react-native-link-lib的配置
-  autoConfig['react-native-link-lib'] = 'react-native-link-lib';
-  
-  // 处理所有peerDependencies
-  let mappingCount = 0;
-  let podspecCount = 0;
-  let fallbackCount = 0;
-  
   peerDependencies.forEach(dep => {
-    // 1. 首先查找预定义映射
+    // 查找对应的Pod名称
     const podName = Object.keys(podNameMapping).find(pod => podNameMapping[pod] === dep);
     
     if (podName) {
       autoConfig[podName] = dep;
-      mappingCount++;
-    } 
-    // 2. 然后查找podspec扫描结果
-    else {
-      const podspecName = Object.keys(podspecConfigs).find(key => podspecConfigs[key] === dep);
-      if (podspecName) {
-        autoConfig[podspecName] = dep;
-        podspecCount++;
-      } 
-      // 3. 最后使用包名作为Pod名称
-      else {
-        autoConfig[dep] = dep;
-        fallbackCount++;
-      }
+      console.log(`映射Pod配置: ${podName} -> ${dep}`);
+    } else {
+      // 如果没有预定义映射，使用包名作为Pod名称
+      autoConfig[dep] = dep;
+      console.log(`直接映射Pod配置: ${dep} -> ${dep}`);
     }
   });
   
-  console.log(`Pod配置来源统计: 映射表(${mappingCount}), podspec扫描(${podspecCount}), 包名回退(${fallbackCount})`);
-  console.log(`总共生成了 ${Object.keys(autoConfig).length} 个Pod配置`);
+  console.log(`生成了 ${Object.keys(autoConfig).length} 个Pod配置`);
   return autoConfig;
 }
 
@@ -270,70 +199,25 @@ function generatePodConfigs(configObject) {
     .join('\n  ');
 }
 
-/**
- * 修改Podfile文件
- * @param {string} podfilePath - Podfile文件路径
- * @param {Object} podConfigs - Pod配置对象
- */
-function modifyPodfile(podfilePath, podConfigs) {
-  if (!fs.existsSync(podfilePath)) {
-    console.log(`Podfile不存在: ${podfilePath}`);
-    return;
-  }
-  
-  let podfileContent = fs.readFileSync(podfilePath, 'utf8');
-  
-  // 查找target行后的位置
-  const targetMatch = podfileContent.match(/target\s+['"](.*?)['"]\s+do/i);
-  
-  if (!targetMatch) {
-    console.log('无法在Podfile中找到target行');
-    return;
-  }
-  
-  // 清除已有的Pod配置
-  // 查找target块的结束位置
-  const targetEndMatch = podfileContent.match(/end\s*$/m);
-  if (!targetEndMatch) {
-    console.log('无法在Podfile中找到target块的结束位置');
-    return;
-  }
-  
-  // 提取target块之前和之后的内容
-  const targetStartIndex = targetMatch.index + targetMatch[0].length;
-  const targetEndIndex = targetEndMatch.index;
-  
-  // 提取target块中的基本内容（排除已有的Pod配置）
-  const targetBlockContent = podfileContent.slice(targetStartIndex, targetEndIndex);
-  const cleanedTargetContent = targetBlockContent.replace(/\s*prefix\s*=\s*['"](.*?)['"]\s*\n|\s*pod\s+['"](.*?)['"].*?\n/g, '');
-  
-  // 添加前缀变量和新的Pod配置
-  let newTargetContent = cleanedTargetContent + "\n    prefix = 'react-native/node_modules'\n";
-  
-  // 生成Pod配置行
-  Object.keys(podConfigs).forEach(podName => {
-    const packageName = podConfigs[podName];
-    newTargetContent += `  pod '${podName}', :path => "\#{prefix}/${packageName}"\n`;
-  });
-  
-  // 重建Podfile内容
-  podfileContent = podfileContent.slice(0, targetStartIndex) + newTargetContent + podfileContent.slice(targetEndIndex);
-  
-  // 写入修改后的内容
-  fs.writeFileSync(podfilePath, podfileContent);
-  console.log('成功修改Podfile文件');
-}
-
 // 主执行逻辑
 function main() {
-  const podfilePath = findPodfile();
+  const podfilePath = findPodfile(__dirname);
+
   if (podfilePath) {
-    console.log(`找到Podfile: ${podfilePath}`);
+    console.log('开始自动生成Pod配置...');
     const config = autoGenerateConfig();
     
-    // 使用JSON.stringify格式化输出，避免重复
-    console.log('生成的配置:', JSON.stringify(config, null, 2));
-    modifyPodfile(podfilePath, config);
+    console.log('生成的配置:', config);
+    
+    const content = fs.readFileSync(podfilePath, 'utf8');
+    const replacementText = `pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib"\n  ` + 
+      generatePodConfigs(config);
+    const newContent = content.replace(
+      /pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib"/,
+      replacementText
+    );
+    fs.writeFileSync(podfilePath, newContent);
+    console.log('成功修改Podfile文件');
   } else {
     console.log('未找到Podfile文件');
   }

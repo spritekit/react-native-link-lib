@@ -10,9 +10,6 @@
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },
-  "bin": {
-    "react-native-link-lib-configure": "scripts/configure-podfile-safe.js"
-  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

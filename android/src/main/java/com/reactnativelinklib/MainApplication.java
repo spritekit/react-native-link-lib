@@ -67,6 +67,10 @@ public class MainApplication extends Application implements ReactApplication {
                     packages.add(new RNViewShotPackage());
                     packages.add(new RNCWebViewPackage());
                     
+                    // 添加自定义模块包
+                    packages.add(new ReactNativeLinkLibPackage());
+                    packages.add(new ReactNativeLinkLibPackageKt());
+                    
                     return packages;
                 }
 

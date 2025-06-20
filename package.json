@@ -3,7 +3,7 @@
   "version": "1.0.38",
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
-    "postinstall": "node postinstall.js"
+    "postinstall": "node scripts/postinstall.js"
   },
   "bin": {
     "react-native-link-lib-configure": "scripts/configure-podfile-safe.js"

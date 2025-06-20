@@ -1,11 +1,23 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
+
+require_relative 'react-native/node_modules/react-native/scripts/react_native_pods'
+require_relative 'react-native/node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+# 3.0.205版本：适配Xcode15，最低版本改为13.4
+platform :ios, '13.0'
+use_frameworks! :linkage => :static
+
+# 设置 Swift 版本
+swift_version = '5.0'
+
+use_react_native!(
+    :path => 'react-native/node_modules/react-native'
+)
+
 target 'react-native-link-lib-sample' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
 
   # Pods for react-native-link-lib-sample
-
   prefix = 'react-native/node_modules'
   pod 'react-native-link-lib', :path => "#{prefix}/react-native-link-lib"
   pod 'RNCAsyncStorage', :path => "#{prefix}/@react-native-async-storage/async-storage"
@@ -15,14 +27,21 @@ target 'react-native-link-lib-sample' do
   pod 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
   pod 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
   pod 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
-  pod 'react-native-popover-view', :path => "#{prefix}/react-native-popover-view"
   pod 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
   pod 'RNScreens', :path => "#{prefix}/react-native-screens"
-  pod 'react-native-storage', :path => "#{prefix}/react-native-storage"
   pod 'RNSVG', :path => "#{prefix}/react-native-svg"
   pod 'react-native-video', :path => "#{prefix}/react-native-video"
   pod 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
   pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
+  
+  # 为所有 Pod 设置 Swift 版本
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '5.0'
+      end
+    end
+  end
   
  
  

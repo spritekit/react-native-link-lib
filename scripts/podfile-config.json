@@ -13,8 +13,7 @@
     "RNFastImage": "react-native-fast-image",
     "RNFlashList": "@shopify/flash-list",
     "RNAudioRecorderPlayer": "react-native-audio-recorder-player",
-    "react-native-storage": "react-native-storage",
-    "react-native-popover-view": "react-native-popover-view"
+    "react-native-storage": "react-native-storage"
   },
   "customPods": {
     "_注释": "这里可以添加自定义的Pod配置，当没有找到peerDependencies时会使用这个配置",

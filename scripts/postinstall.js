@@ -168,6 +168,38 @@ function createPodNameMapping() {
 }
 
 /**
+ * 验证包是否有podspec文件
+ * @param {string} packageName - 包名
+ * @returns {boolean} - 是否存在podspec文件
+ */
+function hasPodspecFile(packageName) {
+  // 查找node_modules中的包路径
+  let currentPath = path.resolve(__dirname);
+  
+  while (currentPath !== path.dirname(currentPath)) {
+    const nodeModulesPath = path.join(currentPath, 'node_modules');
+    const packagePath = path.join(nodeModulesPath, packageName);
+    
+    if (fs.existsSync(packagePath)) {
+      try {
+        const files = fs.readdirSync(packagePath);
+        const hasPodspec = files.some(file => file.endsWith('.podspec'));
+        console.log(`检查 ${packageName} podspec文件: ${hasPodspec ? '存在' : '不存在'}`);
+        return hasPodspec;
+      } catch (error) {
+        console.log(`读取包目录失败 ${packageName}:`, error.message);
+        return false;
+      }
+    }
+    
+    currentPath = path.dirname(currentPath);
+  }
+  
+  console.log(`未找到包: ${packageName}`);
+  return false;
+}
+
+/**
  * 自动生成Pod配置
  * @returns {Object} - 自动生成的配置对象
  */
@@ -184,7 +216,16 @@ function autoGenerateConfig() {
         // 如果配置文件中有自定义的Pod配置，直接使用
         if (config.customPods && Object.keys(config.customPods).length > 0) {
           console.log('使用配置文件中的自定义Pod配置');
-          return config.customPods;
+          // 验证自定义配置中的包是否有podspec文件
+          const validatedConfig = {};
+          Object.entries(config.customPods).forEach(([podName, packageName]) => {
+            if (hasPodspecFile(packageName)) {
+              validatedConfig[podName] = packageName;
+            } else {
+              console.log(`跳过无podspec文件的包: ${packageName}`);
+            }
+          });
+          return validatedConfig;
         }
       }
     } catch (error) {
@@ -204,6 +245,12 @@ function autoGenerateConfig() {
     // 忽略 react-native 官方库
     if (dep === 'react-native') {
       console.log(`忽略官方库: ${dep}`);
+      return;
+    }
+    
+    // 验证包是否有podspec文件
+    if (!hasPodspecFile(dep)) {
+      console.log(`跳过无podspec文件的包: ${dep}`);
       return;
     }
     
@@ -235,6 +282,46 @@ function generatePodConfigs(configObject) {
     .join('\n  ');
 }
 
+/**
+ * 清理Podfile中的重复配置
+ * @param {string} content - Podfile内容
+ * @returns {string} - 清理后的内容
+ */
+function cleanDuplicateConfigs(content) {
+  // 移除所有自动生成的pod配置（除了react-native-link-lib本身）
+  const lines = content.split('\n');
+  const cleanedLines = [];
+  let skipNextLines = false;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    
+    // 如果找到react-native-link-lib的配置行，标记开始清理
+    if (line.includes("pod 'react-native-link-lib', :path =>")) {
+      cleanedLines.push(line.replace(/pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib".*/, "pod 'react-native-link-lib', :path => \"#\{prefix\}\/react-native-link-lib\""));
+      skipNextLines = true;
+      continue;
+    }
+    
+    // 如果正在跳过自动生成的配置
+    if (skipNextLines) {
+      // 检查是否是自动生成的pod配置行
+      if (line.trim().startsWith("pod '") && line.includes(":path => \"#\{prefix\}\/")) {
+        // 跳过这行，继续下一行
+        continue;
+      } else {
+        // 遇到非自动生成的行，停止跳过
+        skipNextLines = false;
+        cleanedLines.push(line);
+      }
+    } else {
+      cleanedLines.push(line);
+    }
+  }
+  
+  return cleanedLines.join('\n');
+}
+
 // 主执行逻辑
 function main() {
   const podfilePath = findPodfile(__dirname);
@@ -245,13 +332,22 @@ function main() {
     
     console.log('生成的配置:', config);
     
-    const content = fs.readFileSync(podfilePath, 'utf8');
-    const replacementText = `pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib"\n  ` + 
-      generatePodConfigs(config);
+    let content = fs.readFileSync(podfilePath, 'utf8');
+    
+    // 先清理重复配置
+    content = cleanDuplicateConfigs(content);
+    
+    // 生成新的配置
+    const podConfigs = generatePodConfigs(config);
+    const replacementText = podConfigs ? 
+      `pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib"\n  ${podConfigs}` :
+      `pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib"`;
+    
     const newContent = content.replace(
       /pod 'react-native-link-lib', :path => "#\{prefix\}\/react-native-link-lib"/,
       replacementText
     );
+    
     fs.writeFileSync(podfilePath, newContent);
     console.log('成功修改Podfile文件');
   } else {
@@ -266,8 +362,10 @@ module.exports = {
   scanPodspecFiles,
   getMainProjectPeerDependencies,
   createPodNameMapping,
+  hasPodspecFile,
   autoGenerateConfig,
-  generatePodConfigs
+  generatePodConfigs,
+  cleanDuplicateConfigs
 };
 
 // 如果直接运行此脚本，执行主逻辑

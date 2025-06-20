@@ -1,6 +1,6 @@
 {
   "name": "react-native-link-lib",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
     "postinstall": "node scripts/postinstall.js"

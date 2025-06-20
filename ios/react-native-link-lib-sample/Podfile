@@ -21,8 +21,7 @@ target 'react-native-link-lib-sample' do
   # Pods for react-native-link-lib-sample
   prefix = 'react-native/node_modules'
   pod 'react-native-link-lib', :path => "#{prefix}/react-native-link-lib"
-  
-  
+
   
   # 为所有 Pod 设置 Swift 版本
   post_install do |installer|

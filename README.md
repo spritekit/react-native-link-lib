@@ -1,6 +1,4 @@
 
-<link rel="stylesheet" href="styles.css">
-
 <div align="center">
 
   <h1>🚀 React Native Link Lib</h1>

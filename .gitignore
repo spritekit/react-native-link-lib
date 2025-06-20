@@ -1,9 +1,14 @@
 # Dependency directories
 node_modules/
-/ios/react-native-link-lib-sample/react-native/package-lock.json
+# Example/Sample projects
+/ios/react-native-link-lib-sample/Pods
+/ios/react-native-link-lib-sample/build
+example/
+sample/
 # Build directories
 lib/
 dist/
+build/
 
 # IDE files
 .idea/
@@ -32,6 +37,7 @@ yarn-error.log*
 
 # TypeScript build files
 *.tsbuildinfo
+*.d.ts.map
 
 # React Native
 /android/build/

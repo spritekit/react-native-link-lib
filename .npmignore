@@ -1,7 +1,7 @@
 # 源代码文件
 src/
 *.ts
-!*.d.ts
+!dist/**/*.d.ts
 
 # 配置文件
 tsconfig.json
@@ -24,11 +24,16 @@ jest.config.*
 # 构建和日志文件
 *.log
 *.tsbuildinfo
-*.map
+!dist/**/*.map
 
 # 开发工具配置
 .vscode/
 .idea/
+
+# 示例和测试项目
+example/
+sample/
+ios/react-native-link-lib-sample/
 *.swp
 *.swo
 

@@ -3,13 +3,25 @@
   "version": "1.0.54",
   "description": "A library to manage React Native dependencies and native configurations",
   "scripts": {
-    "postinstall": "node scripts/postinstall.js"
+    "build": "npx tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist node_modules package-lock.json",
+    "prepublishOnly": "npm run clean && npm run build",
+    "postinstall": "node scripts/postinstall.js",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
   },
   "bin": {
     "react-native-link-lib-configure": "scripts/configure-podfile-safe.js"
   },
-  "main": "dist/cjs/index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "scripts",
+    "android",
+    "react-native-link-lib.podspec",
+    "README.md"
+  ],
   "peerDependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-picker/picker": "2.7.7",
@@ -31,6 +43,8 @@
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {
-    "@react-native-community/cli": "^18.0.0"
+    "@react-native-community/cli": "^18.0.0",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
   }
 }

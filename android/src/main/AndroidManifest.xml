@@ -1,35 +1,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.reactnativelinklib">
 
-    <!-- 网络权限 -->
+    <!-- 核心网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
-    <!-- 存储权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 基础存储权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="32" />
     
+    <!-- 可选权限 - 根据实际需要启用 -->
     <!-- 音频权限 -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- <uses-permission android:name="android.permission.RECORD_AUDIO" /> -->
+    <!-- <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> -->
     
     <!-- 相机权限 -->
-    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     
     <!-- 振动权限 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
     
-    <!-- 唤醒锁权限 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    
-    <!-- 系统窗口权限 -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    
-    <!-- 前台服务权限 (Android 9+) -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    
-    <!-- 通知权限 (Android 13+) -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 系统权限 -->
+    <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
+    <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
+    <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> -->
+    <!-- <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> -->
 
     <application
         android:name=".MainApplication"

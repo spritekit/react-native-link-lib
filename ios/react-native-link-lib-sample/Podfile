@@ -1,6 +1,5 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
-
 target 'react-native-link-lib-sample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
@@ -9,5 +8,24 @@ target 'react-native-link-lib-sample' do
 
     prefix = 'react-native/node_modules'
   pod 'react-native-link-lib', :path => "#{prefix}/react-native-link-lib"
+  pod 'RNScreens', :path => "#{prefix}/react-native-screens"
+  pod 'react-native-safe-area-context', :path => "#{prefix}/react-native-safe-area-context"
+  pod 'RNFS', :path => "#{prefix}/react-native-fs"
+  pod 'BVLinearGradient', :path => "#{prefix}/react-native-linear-gradient"
+  pod 'RNSVG', :path => "#{prefix}/react-native-svg"
+  pod 'react-native-view-shot', :path => "#{prefix}/react-native-view-shot"
+  pod 'react-native-webview', :path => "#{prefix}/react-native-webview"
+  pod 'RNCPicker', :path => "#{prefix}/@react-native-picker/picker"
+  pod 'react-native-update', :path => "#{prefix}/react-native-update"
+  pod 'RNCAsyncStorage', :path => "#{prefix}/@react-native-async-storage/async-storage"
+  pod 'react-native-video', :path => "#{prefix}/react-native-video"
+  pod 'react-native-pager-view', :path => "#{prefix}/react-native-pager-view"
+  pod 'RNFastImage', :path => "#{prefix}/react-native-fast-image"
+  pod 'RNFlashList', :path => "#{prefix}/@shopify/flash-list"
+  pod 'RNAudioRecorderPlayer', :path => "#{prefix}/react-native-audio-recorder-player"
+  pod 'react-native-tim-js', :path => "#{prefix}/@tencentcloud/chat-react-native"
 
 end
+
+
+# 测试哈哈哈哈哈哈成功
